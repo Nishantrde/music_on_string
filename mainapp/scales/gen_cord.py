@@ -19,23 +19,30 @@ class Gen_cords:
         self.span_i = 0
 
         self.string_scale = []
+        self.string_index = []
+        self.covered_string = 0
 
         for note in TRIAD:
             self.cord.append(self.lst[note])
             self.check_lst.append(self.lst[note])
             self.or_lst.append(self.lst[note])
-        
+
+        for note in GUITAR:
+            
+            print(MUSIC_NOTES[MUSIC_NOTES.index(note):]+MUSIC_NOTES[:MUSIC_NOTES.index(note)])
+            self.string_scale.append(MUSIC_NOTES[MUSIC_NOTES.index(note):]+MUSIC_NOTES[:MUSIC_NOTES.index(note)])
         for note in self.cord:
-            for guitar_note in GUITAR:
-                self.string_scale = [] 
-                self.span_i += 1
-                string = [guitar_note]
-                for str_note in string:
-                    if note is str_note:
-                        self.span = self.span_i
-                    else:
-                        string.append()
-                    
+            print("note:"+note)
+            for scale in self.string_scale:
+                span_i = 0
+                for nt in scale:
+                    if span_i is not HAND_SPAN:
+                        span_i+=1
+                        # print(span_i)
+                        if nt is note:
+                            self.span = span_i
+                            print(nt)
+                            break
 
 
 if __name__ == "__main__":
